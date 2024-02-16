@@ -1,28 +1,101 @@
-# NUCPC
+# WINGET
 
-### Here's the step by step instructions
+### Here's the step by step instructions to install winget
 
-Brand new unit
-Let it reboot a few times once it's complete.
-You'll be prompted with setup wizard.
-For the initial setup you'll need the account info and password.
-Once you enter the account info the unit will reboot.
-After reboot, go ahead click on More. Do worry about any error you see.
-We still need to configure the unit. Now click on Settings.
-You should be prompted to enter Administrator password which is sfb.
-In the Settings window, make a note of the current IP Address and Host name.
-Click on Windows Settings. Again you will be prompted to enter Administrator password, enter sfb.
-Now you'll be in window screen select administrator and enter sfb for the password.
-Once you're in windows desktop, press windows key + I, then select System.
-Select Remote Desktop, then Eanble Remote Destkop. 
-Under Remote Deskto you see "About", click About, click "Rename this PC"
-For PC name please use this format "SiteCodeTRSRoomName"
-Enter the new PC name and follow the prompt but don't reboot yet, leave the window open.
-Update the Time/Date and Timezone, and use the NTP Server 172.17.32.253 or 132.189.40.119
-Select Account make sure you have the correct account and password.
-Under "Supported meeting mode" make sure its set to "Microsoft Teams (default)"
-then click Save and exit.
- 
+Open up powershell with your a-account:
+Then copy and paste the script below:
+
+
+```
+Add-AppxPackage -RegisterByFamilyName -MainPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe
+$progressPreference = 'silentlyContinue'
+Write-Information "Downloading WinGet and its dependencies..."
+Invoke-WebRequest -Uri https://aka.ms/getwinget -OutFile Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+Invoke-WebRequest -Uri https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx -OutFile Microsoft.UI.Xaml.2.7.x64.appx
+Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
+Add-AppxPackage Microsoft.UI.Xaml.2.7.x64.appx
+Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+```
+
+[https://aka.ms/winget](https://aka.ms/winget)
+[https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/deployment/install-winget-windows-iot](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/deployment/install-winget-windows-iot)
+
+
+
+
+
+### After the install:
+
+#### Search
+```
+winget search -q `"`"
+winget search displaylink
+```
+
+```
+winget install displaylink.graphicsDriver
+winget install 9N09F8V8FS02
+```
+
+#### HP PC Hardware Diagnostics Windows
+
+```winget install 9P4PNDG7L782```
+
+#### HP Smart
+```winget install 9WZDNCRFHWLH```
+
+#### HP Scan and Capture
+```winget install 9WZDNCRFHWL0```
+
+### Better version of MPV
+```winget install mpv.net```
+```
+winget search mpv
+winget install 9P3JFR0CLLL6 --accept-package-agreements --accept-source-agreements -h
+```
+
+```winget install yt-dlp.yt-dlp```
+
+```winget search OpenSpeedTest-Server```
+```winget install 9PBKQKR4X79R```
+
+
+```
+ECHO Y | cmd /c winget upgrade --all --silent
+```
+```winget upgrade -uhr --accept-source-agreements --accept-package-agreements```
+
+
+```ECHO Y | cmd /c winget upgrade -uhr --accept-source-agreements --accept-package-agreements -h  --silent```
+
+
+
+### Displaying installed
+```winget list --name Poly```
+
+```winget list --upgrade-available```
+
+#### Uninstalling
+```winget uninstall Docker.DockerDesktop --disable-interactivity --silent```
+```winget uninstall Ghisler.TotalCommander --disable-interactivity --silent```
+```winget install Ghisler.TotalCommander --disable-interactivity --silent```
+
+#### Install Dell Support Assistant
+```winget install Dell.CommandUpdate.Universal```
+
+#### MediaInfo
+```winget install MediaArea.MediaInfo.GUI```
+
+#### Python 3.12
+```winget install 9NCVDN91XZQP```
+
+#### FFmpeg
+```winget install Gyan.FFmpeg```
+
+#### or get Handbrake
+```winget install HandBrake.HandBrake```
+
 
 
 ## Timezone
@@ -71,7 +144,7 @@ change the following_***
 
 The reset of the field should be set to default.
 
-[Install Logitech Sync new version](https://ufile.io/pkldq4a3)
+
 
 [Install Logitech Sync](https://download01.logi.com/web/ftp/pub/techsupport/cameras/LogiSyncInstaller_2.0.412.exe)
 
